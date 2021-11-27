@@ -7,10 +7,13 @@
   'description': """
     freight transport
     """,
+  'author': 'hepan',
+  'website': 'https://www.tukecx.com/',
   'depends' : ['base','sale'],
   'data': [
     'security/ir.model.access.csv',
     'views/freight_transport_views.xml',
   ],
   'application': True,
+  "images":["static/description/Banner.png"],
 }
