@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <record id="freight_transport_tree_view" model="ir.ui.view">
+    <field name="name">货运信息</field>
+    <field name="model">freight.transport</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="deliver_date" string="发货日期"/>
+        <field name="arrival_date" string="到货日期"/>
+        <field name="transport_code" string="货运单号"/>
+        <field name="send_state" string="发货状态"/>
+        <field name="note" string="备注"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="freight_transport_form_view" model="ir.ui.view">
+    <field name="name">货运信息</field>
+    <field name="model">freight.transport</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+            <group>
+                <group>
+                    <field name="order_id" string="订单信息"/>
+                </group>
+            </group>
+            
+            <group>
+                <group>
+                    <field name="send_state" string="发货状态"/>
+                </group>
+                <group>
+                    <field name="transport_code" string="货运代码"/>
+                </group>
+            </group>
+            <group>
+                <group>
+                    <field name="deliver_date" string="发货日期"/>
+                </group>
+                <group>
+                    <field name="arrival_date" string="到货日期"/>
+                </group>
+            </group>
+
+          <notebook>
+            <page string="备注">
+              <group>
+                <field name="note"/>
+              </group>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+  <record id="view_sale_order_calendar" model="ir.ui.view">
+    <field name="name">货运日历</field>
+    <field name="model">freight.transport</field>
+    <field name="arch" type="xml">
+        <calendar string="货运订单" date_start="deliver_date" mode="month" color="send_state" hide_time="true" event_limit="5">
+            <field name="transport_code" string="货运代码" />
+            <field name="arrival_date" string="到货日期"/>
+            <field name="note"  string="备注"/>
+            <field name="send_state" string="发货状态" filters="1" invisible="1"/>
+        </calendar>
+    </field>
+  </record>
+  <record id="freight_transport_search_view" model="ir.ui.view">
+    <field name="name">货运信息</field>
+    <field name="model">freight.transport</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="transport_code" string="名称"/>
+      </search>
+    </field>
+  </record>
+
+  <record id="freight_transport_act_window" model="ir.actions.act_window">
+    <field name="name">货运信息</field>
+    <field name="res_model">freight.transport</field>
+    <field name="view_mode">tree,form,calendar</field>
+  </record>
+
+    <menuitem name="货运" id="freight_transport_menu_action" parent="sale.menu_sale_config" sequence="20"/>
+
+    <menuitem id="order_freight_transport_menu_action"
+                sequence="20"
+                name="货运信息"
+                parent="freight_transport_menu_action"
+                action="freight_transport_act_window"/>
+</odoo>
